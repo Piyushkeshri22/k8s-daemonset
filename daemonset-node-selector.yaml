@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: DaemonSet
+
+metadata:
+  name: logging-daemonset
+
+spec:
+  selector:
+    matchLabels:
+      app: logging
+
+  template:
+    metadata:
+      labels:
+        app: logging
+
+    spec:
+      nodeSelector:
+        logging: "true"
+
+      containers:
+      - name: nginx
+        image: nginx

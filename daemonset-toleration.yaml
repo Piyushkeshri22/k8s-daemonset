@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+
+metadata:
+  name: logging-agent
+
+spec:
+  selector:
+    matchLabels:
+      app: logging-agent
+
+  template:
+    metadata:
+      labels:
+        app: logging-agent
+
+    spec:
+      tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "logging"
+        effect: "NoSchedule"
+
+      containers:
+      - name: nginx
+        image: nginx
